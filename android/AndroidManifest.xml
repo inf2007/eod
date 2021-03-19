@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.boliao.eod"
+    android:installLocation="preferExternal"
+    android:versionCode="1"
+    android:versionName="1.0">
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name="com.singaporetech.eod.EODApp"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:label="@string/app_name"
+        android:theme="@style/GdxTheme">
+
+        <receiver
+            android:name="com.singaporetech.eod.OnBootReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.singaporetech.eod.GameStateService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <service
+            android:name="com.singaporetech.eod.PasswordGeneratorService"
+            android:exported="false" />
+
+        <activity
+            android:name="com.singaporetech.eod.Splash"
+            android:screenOrientation="fullSensor">
+            <intent-filter>
+
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.singaporetech.eod.AndroidLauncher"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+
+    </application>
+
+</manifest>
