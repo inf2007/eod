@@ -23,6 +23,8 @@ import kotlinx.coroutines.*
  * - this background Service will try to persist until the app is explicitly closed
  * - QNS: when will it be killed?
  * - QNS: what happens when it is killed?
+ *
+ * TODO GameStateServiceModel layer below to focus on the logic.
  */
 class GameStateService: Service(), SensorEventListener, CoroutineScope by MainScope() {
     companion object {
