@@ -107,7 +107,7 @@ class SplashViewModelFactory(
         private val playerRepo: PlayerRepo,
         private val weatherRepo: WeatherRepo)
     : ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(SplashViewModel::class.java)) {
             return SplashViewModel(playerRepo, weatherRepo) as T
         }

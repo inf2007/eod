@@ -38,7 +38,8 @@
 
         <activity
             android:name="com.singaporetech.eod.Splash"
-            android:screenOrientation="fullSensor">
+            android:screenOrientation="fullSensor"
+            android:exported="true">
             <intent-filter>
 
                 <action android:name="android.intent.action.VIEW" />

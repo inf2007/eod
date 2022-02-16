@@ -2,16 +2,16 @@ buildscript {
     ext {
         appName = "eod"
 
-        kotlinVer = '1.4.30'
-        coroutinesVer = '1.3.7'
-        mainVer = '1.2.0'
-        ktxVer = '1.3.2'
-        testVer = '1.3.0'
-        workVer = '2.5.0'
-        espressoVer = '3.3.0'
+        kotlinVer = '1.6.10'
+        coroutinesVer = '1.5.2'
+        mainVer = '1.4.1'
+        ktxVer = '1.7.0'
+        testVer = '1.4.0'
+        workVer = '2.7.1'
+        espressoVer = '3.4.0'
         supportVer = '28.0.0'
-        archVer = '2.3.0'
-        roomVer = '2.2.6'
+        archVer = '2.4.1'
+        roomVer = '2.4.1'
         junitVer = '1.1.2'
 
         gdxVersion = '1.9.10'
@@ -25,7 +25,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.2'
+        classpath 'com.android.tools.build:gradle:7.1.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVer"
     }
 }
