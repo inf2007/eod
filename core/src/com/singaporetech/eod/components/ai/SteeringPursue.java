@@ -6,7 +6,7 @@ import com.singaporetech.eod.SETTINGS;
 import com.singaporetech.eod.components.Transform;
 
 /**
- * Created by mrboliao on 23/1/17.
+ * Created by mrchek on 23/1/17.
  */
 
 public class SteeringPursue extends SteeringArrive {

@@ -3,7 +3,7 @@ package com.singaporetech.eod.components.render;
 import com.singaporetech.eod.SETTINGS;
 
 /**
- * Created by mrboliao on 3/2/17.
+ * Created by mrchek on 3/2/17.
  */
 
 public class SpriteBam extends Sprite implements Renderable {

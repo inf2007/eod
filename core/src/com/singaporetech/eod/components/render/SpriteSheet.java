@@ -9,7 +9,7 @@ import com.singaporetech.eod.SETTINGS;
 import com.singaporetech.eod.components.Transform;
 
 /**
- * Created by mrboliao on 24/1/17.
+ * Created by mrchek on 24/1/17.
  */
 
 public class SpriteSheet extends com.singaporetech.eod.components.Component implements Renderable {

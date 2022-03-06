@@ -10,7 +10,7 @@ import com.singaporetech.eod.components.Input;
 import com.singaporetech.eod.components.render.SpriteSheet;
 
 /**
- * Created by mrboliao on 23/1/17.
+ * Created by mrchek on 23/1/17.
  */
 
 public class FsmPlayer extends Fsm {

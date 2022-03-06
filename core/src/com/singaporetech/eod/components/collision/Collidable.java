@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.singaporetech.eod.GameObject;
 
 /**
- * Created by mrboliao on 24/1/17.
+ * Created by mrchek on 24/1/17.
  */
 
 public interface Collidable {

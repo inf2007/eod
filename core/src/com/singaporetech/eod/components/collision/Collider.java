@@ -15,7 +15,7 @@ import com.singaporetech.eod.components.render.Renderable;
 import com.singaporetech.eod.components.render.RenderableDebug;
 
 /**
- * Created by mrboliao on 24/1/17.
+ * Created by mrchek on 24/1/17.
  */
 
 public class Collider extends com.singaporetech.eod.components.Component implements Collidable, RenderableDebug {

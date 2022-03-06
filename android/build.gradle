@@ -22,7 +22,7 @@ android {
         exclude 'META-INF/atomicfu.kotlin_module' // added to prevent warnings when using Room
     }
     defaultConfig {
-        applicationId "com.boliao.eod"
+        applicationId "com.singaporetech.eod"
         minSdkVersion 26
         targetSdkVersion 31
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -98,7 +98,7 @@ task run(type: Exec) {
     }
 
     def adb = path + "/platform-tools/adb"
-    commandLine "$adb", 'shell', 'am', 'start', '-n', 'com.boliao.eod/AndroidLauncher'
+    commandLine "$adb", 'shell', 'am', 'start', '-n', 'com.singaporetech.eod/AndroidLauncher'
 }
 
 dependencies {

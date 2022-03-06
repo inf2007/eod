@@ -8,7 +8,7 @@ import com.singaporetech.eod.components.Movement;
 import com.singaporetech.eod.components.Transform;
 
 /**
- * Created by mrboliao on 22/1/17.
+ * Created by mrchek on 22/1/17.
  */
 
 public abstract class Steering extends Component {

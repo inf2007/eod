@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#010101"
-    tools:context="com.boliao.eod.com.singaporetech.eod.Splash">
+    tools:context="com.singaporetech.eod.Splash">
 
     <TextView
         android:id="@+id/weather_txtview"

@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Created by mrboliao on 24/1/17.
+ * Created by mrchek on 24/1/17.
  * NOTE THAT THIS IS LEGACY CODE THAT HAS NO PROPER COMMENTS
  */
 public class CollisionEngine implements Engine {

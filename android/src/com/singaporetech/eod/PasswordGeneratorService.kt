@@ -6,8 +6,8 @@ import android.content.Context
 import android.util.Log
 import kotlinx.coroutines.*
 
-private const val ACTION_ENCRYPT = "com.boliao.eod.action.ENCRYPT"
-private const val EXTRA_NAME = "com.boliao.eod.extra.NAME"
+private const val ACTION_ENCRYPT = "com.singaporetech.eod.action.ENCRYPT"
+private const val EXTRA_NAME = "com.singaporetech.eod.extra.NAME"
 
 /**
  * A password generator service that mocks a very CPU-intensive cryptography algo.

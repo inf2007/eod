@@ -6,7 +6,7 @@ import com.singaporetech.eod.SETTINGS;
 import com.singaporetech.eod.components.collision.Collider;
 
 /**
- * Created by mrboliao on 19/1/17.
+ * Created by mrchek on 19/1/17.
  */
 
 public class Movement extends Component {

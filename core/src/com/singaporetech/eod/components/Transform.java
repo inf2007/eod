@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
 /**
- * Created by mrboliao on 19/1/17.
+ * Created by mrchek on 19/1/17.
  */
 
 public class Transform extends Component {

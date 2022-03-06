@@ -11,7 +11,7 @@ import com.singaporetech.eod.components.Component;
 import com.singaporetech.eod.components.Transform;
 
 /**
- * Created by mrboliao on 19/1/17.
+ * Created by mrchek on 19/1/17.
  */
 
 public class Sprite extends Component implements Renderable {

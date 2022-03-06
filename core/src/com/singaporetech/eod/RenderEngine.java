@@ -15,7 +15,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Created by mrboliao on 19/1/17.
+ * Created by chek on 19/1/17.
  * NOTE THAT THIS IS LEGACY CODE THAT HAS NO PROPER COMMENTS
  */
 

@@ -1,7 +1,7 @@
 package com.singaporetech.eod;
 
 /**
- * Created by mrboliao on 17/1/17.
+ * Created by mrchek on 17/1/17.
  * NOTE THAT THIS IS LEGACY CODE THAT HAS NO PROPER COMMENTS
  */
 

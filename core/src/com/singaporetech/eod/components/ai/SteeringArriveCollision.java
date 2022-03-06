@@ -6,7 +6,7 @@ import com.singaporetech.eod.GameObject;
 import com.singaporetech.eod.components.collision.Collider;
 
 /**
- * Created by mrboliao on 25/1/17.
+ * Created by mrchek on 25/1/17.
  */
 
 public class SteeringArriveCollision extends SteeringArrive {

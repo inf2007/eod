@@ -10,7 +10,7 @@ import com.singaporetech.eod.SETTINGS;
 import com.singaporetech.eod.components.render.SpriteInput;
 
 /**
- * Created by mrboliao on 20/1/17.
+ * Created by mrchek on 20/1/17.
  */
 
 public class Input extends Component{

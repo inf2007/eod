@@ -3,7 +3,7 @@ package com.singaporetech.eod.components.render;
 import com.badlogic.gdx.math.Rectangle;
 
 /**
- * Created by mrboliao on 19/1/17.
+ * Created by mrchek on 19/1/17.
  */
 
 /**

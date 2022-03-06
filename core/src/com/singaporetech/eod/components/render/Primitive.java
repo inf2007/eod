@@ -8,7 +8,7 @@ import com.singaporetech.eod.components.Component;
 import com.singaporetech.eod.components.Transform;
 
 /**
- * Created by mrboliao on 3/2/17.
+ * Created by mrchek on 3/2/17.
  */
 
 public abstract class Primitive extends Component implements RenderableDebug {

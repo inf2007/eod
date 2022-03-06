@@ -6,10 +6,8 @@ import android.app.NotificationManager
 import android.content.Context
 import android.graphics.Color
 import android.os.Build
-import android.util.Log
 import androidx.work.Worker
 import androidx.work.WorkerParameters
-import com.boliao.eod.R
 
 /**
  * A reminder worker to do the work need to generate and send reminders for charging.
@@ -19,14 +17,13 @@ class ReminderWorker(context: Context, workerParams: WorkerParameters)
 
     init {
         notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-            notificationManager.createNotificationChannel(
-                    NotificationChannel(
-                            NOTIFICATION_CHANNEL_ID,
-                            context.getString(R.string.channel_name),
-                            NotificationManager.IMPORTANCE_HIGH
-                    )
-            )
+        notificationManager.createNotificationChannel(
+                NotificationChannel(
+                        NOTIFICATION_CHANNEL_ID,
+                        context.getString(R.string.channel_name),
+                        NotificationManager.IMPORTANCE_HIGH
+                )
+        )
     }
 
     override fun doWork(): Result {

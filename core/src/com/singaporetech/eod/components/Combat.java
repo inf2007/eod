@@ -8,7 +8,7 @@ import com.singaporetech.eod.components.render.SpriteBam;
 import com.singaporetech.eod.components.render.SpriteSheet;
 
 /**
- * Created by mrboliao on 3/2/17.
+ * Created by mrchek on 3/2/17.
  */
 
 public class Combat extends Component{

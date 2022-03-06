@@ -12,7 +12,6 @@ import android.os.Binder
 import android.os.Build
 import android.os.IBinder
 import android.util.Log
-import com.boliao.eod.R
 import kotlinx.coroutines.*
 
 /**
@@ -36,8 +35,8 @@ class GameStateService: Service(), SensorEventListener, CoroutineScope by MainSc
         private const val PENDINGINTENT_ID = 1
 
         // broadcast uris
-        const val BROADCAST_ACTION = "com.boliao.eod.STEP_COUNT"
-        const val STEP_KEY = "com.boliao.eod.STEP_KEY"
+        const val BROADCAST_ACTION = "com.singaporetech.eod.STEP_COUNT"
+        const val STEP_KEY = "com.singaporetech.eod.STEP_KEY"
     }
 
     // - add var for NotificationManager

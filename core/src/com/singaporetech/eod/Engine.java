@@ -1,7 +1,7 @@
 package com.singaporetech.eod;
 
 /**
- * Created by mrboliao on 24/1/17.
+ * Created by mrchek on 24/1/17.
  * NOTE THAT THIS IS LEGACY CODE THAT HAS NO PROPER COMMENTS
  */
 public interface Engine {

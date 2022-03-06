@@ -13,7 +13,7 @@ import com.singaporetech.eod.components.collision.Collider;
 import com.singaporetech.eod.components.render.SpriteSheet;
 
 /**
- * Created by mrboliao on 19/1/17.
+ * Created by mrchek on 19/1/17.
  * Finite State Machine class.
  */
 

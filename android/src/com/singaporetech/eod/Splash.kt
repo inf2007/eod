@@ -7,8 +7,7 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import com.boliao.eod.R
-import com.boliao.eod.databinding.ActivitySplashBinding
+import com.singaporetech.eod.databinding.ActivitySplashBinding
 import kotlinx.coroutines.*
 import java.lang.ref.WeakReference
 import kotlin.random.Random

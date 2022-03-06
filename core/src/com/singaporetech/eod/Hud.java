@@ -20,7 +20,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.singaporetech.eod.components.render.Renderable;
 
 /**
- * Created by mrboliao on 16/1/17.
+ * Created by mrchek on 16/1/17.
  * NOTE THAT THIS IS LEGACY CODE THAT HAS NO PROPER COMMENTS
  */
 

@@ -7,7 +7,7 @@ import com.singaporetech.eod.GameObject;
 import com.singaporetech.eod.components.render.SpriteSheet;
 
 /**
- * Created by mrboliao on 23/1/17.
+ * Created by mrchek on 23/1/17.
  */
 
 public class FsmBug extends Fsm {

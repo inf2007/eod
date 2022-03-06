@@ -6,7 +6,7 @@ import com.singaporetech.eod.components.render.PrimitiveHealth;
 import com.singaporetech.eod.components.render.SpritePlusOne;
 
 /**
- * Created by mrboliao on 2/2/17.
+ * Created by mrchek on 2/2/17.
  * comments
  */
 

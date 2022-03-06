@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.singaporetech.eod.SETTINGS;
 
 /**
- * Created by mrboliao on 23/1/17.
+ * Created by mrchek on 23/1/17.
  */
 
 public class SteeringArrive extends SteeringSeek {

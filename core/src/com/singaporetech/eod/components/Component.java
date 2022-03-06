@@ -3,7 +3,7 @@ package com.singaporetech.eod.components;
 import com.singaporetech.eod.GameObject;
 
 /**
- * Created by mrboliao on 19/1/17.
+ * Created by mrchek on 19/1/17.
  */
 
 public abstract class Component {

@@ -25,8 +25,6 @@ import org.junit.runner.RunWith;
 
 import androidx.test.uiautomator.*;
 
-import com.boliao.eod.R;
-
 import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.clearText;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
