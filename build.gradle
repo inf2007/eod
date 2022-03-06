@@ -3,17 +3,6 @@ buildscript {
         appName = "eod"
 
         kotlinVer = '1.6.10'
-        coroutinesVer = '1.5.2'
-        mainVer = '1.4.1'
-        ktxVer = '1.7.0'
-        testVer = '1.4.0'
-        workVer = '2.7.1'
-        espressoVer = '3.4.0'
-        supportVer = '28.0.0'
-        archVer = '2.4.1'
-        roomVer = '2.4.1'
-        junitVer = '1.1.2'
-
         gdxVersion = '1.9.10'
         roboVMVersion = '2.3.7'
         box2DLightsVersion = '1.4'
@@ -21,11 +10,11 @@ buildscript {
         aiVersion = '1.8.0'
     }
     repositories {
-        jcenter()
+        mavenCentral()
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.1.1'
+        classpath 'com.android.tools.build:gradle:7.1.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVer"
     }
 }
@@ -38,7 +27,7 @@ allprojects {
 
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 
