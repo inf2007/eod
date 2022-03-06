@@ -5,11 +5,7 @@
     android:versionCode="1"
     android:versionName="1.0">
 
-
-    <!-- NDK-ML -->
-    <!-- Make sure the device has a camera. If you use android.hardware.camera without .any,
-    it will not work if you have a device without a back camera, such as most Chromebooks. -->
-    <!-- Specifying that the app will need camera permission -->
+    <!-- TODO ML 0: add permissions for camera -->
     <uses-feature android:name="android.hardware.camera.any" />
     <uses-permission android:name="android.permission.CAMERA" />
 

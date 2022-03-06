@@ -40,7 +40,7 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
     private lateinit var binding:ActivitySplashBinding
 
     /**
-     * TODO NDK-ML: additional camera vars.
+     * TODO ML 1: add some camera vars.
      */
     private lateinit var preview: Preview // Preview use case, fast, responsive view of the camera
     private lateinit var imageAnalyzer: ImageAnalysis // Analysis use case, for running ML code
@@ -111,7 +111,7 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
         }
 
         /**
-         * TODO NDK-ML: Init additional view elements.
+         * TODO ML 3: Init additional view elements.
          * 1. start camera view if permissions are granted
          * 2. initialize recyclerview for showing inference results
          * 3. observe results to display in recycler view
@@ -131,16 +131,29 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
         val viewAdapter = InferenceOutputsAdapter(this)
         binding.recognitionResults.adapter = viewAdapter
 
-        // observe results to display in recyclerview
+        /**
+         * TODO ML 6: do something interesting when detected an object in the camera
+         * 1. display top inference output in the view
+         * 2. unlock secret backdoor login when a particular object is within sight
+         */
+        // observe inference outputs to display in recyclerview
         splashViewModel.inferenceOutputList.observe(this) {
             viewAdapter.submitList(it)
+            if (it[0].label == "refrigerator") {
+                binding.msgTxtview.text = "UNLOCKED SECRET \nbackdoor login..."
+                launch {
+                    delay(3000)
+                    launchGame()
+                }
+            }
         }
 
     }
 
-
     /**
-     * TODO NDK-ML: add boilerplate to handle camera permissions
+     * TODO ML 4: add boilerplate to handle camera permissions
+     */
+    /**
      * Check all permissions are granted - use for Camera permission in this example.
      * [code from https://github.com/hoitab/TFLClassify]
      */
@@ -149,9 +162,7 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
             baseContext, it
         ) == PackageManager.PERMISSION_GRANTED
     }
-
     /**
-     * TODO NDK-ML: add more boilerplate to handle camera permissions
      * This gets called after the Camera permission pop up is shown.
      * [code from https://github.com/hoitab/TFLClassify]
      */
@@ -178,7 +189,6 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
             }
         }
     }
-
     /**
      * Start the Camera which involves:
      *
@@ -251,13 +261,12 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
      *   - .launch is fire and forget, .async is execute for a deferred result
      *   - the launch block below is non-blocking
      */
-    /*
     override fun onResume() {
         super.onResume()
+        binding.msgTxtview.text = ""
 
-        onResumeLaunch()
+        // onResumeLaunch()
     }
-    */
 
     fun onResumeLaunch() {
         var result1 = "empty1"
@@ -346,7 +355,7 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
         private val TAG = Splash::class.simpleName
 
         /**
-         * TODO NDK-ML: Some consts for managing the ML stuff
+         * TODO ML 1: Some consts for managing the ML stuff
          */
         private const val REQUEST_CODE_PERMISSIONS = 999 // Return code after asking for permission
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA) // permission needed
@@ -409,7 +418,10 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
     }
 
     /**
-     * TODO NDK-ML: define a class to handle the ML results derived from ImageAnalysis.Analyzer
+     * TODO ML 5: define a class to handle the ML results derived from ImageAnalysis.Analyzer
+     * - note that you can load a new tflite model for ML using the Android Studio interface
+     * - you can download pre-trained models at https://tfhub.dev
+     * - you can also train your own model using datasets at https://www.tensorflow.org/datasets
      *
      * [code adapted from https://github.com/hoitab/TFLClassify]
      */

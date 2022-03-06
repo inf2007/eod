@@ -32,13 +32,17 @@
         android:fontFamily="@font/conthrax"
         android:text="@string/welcome_note"
         android:textSize="16sp"
-        android:textColor="@android:color/holo_orange_light"
+        android:textColor="@android:color/holo_green_light"
         android:gravity="center"
         android:textAlignment="gravity"
         app:layout_constraintTop_toBottomOf="@id/weather_txtview"
         app:layout_constraintEnd_toEndOf="@+id/name_edtxt"
         app:layout_constraintStart_toStartOf="@+id/name_edtxt" />
 
+    <!-- TODO ML 2: Add some views for processing video as login
+         1. add a camera view to steam video frames for processing
+         2. add a recyclerview to show ML results
+     -->
     <androidx.camera.view.PreviewView
         android:id="@+id/viewFinder"
         android:layout_marginTop="10dp"
