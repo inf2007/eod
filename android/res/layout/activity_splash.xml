@@ -36,9 +36,27 @@
         android:textColor="@android:color/holo_orange_light"
         android:gravity="center"
         android:textAlignment="gravity"
-        app:layout_constraintBottom_toTopOf="@+id/name_edtxt"
+        app:layout_constraintBottom_toTopOf="@id/viewFinder"
         app:layout_constraintEnd_toEndOf="@+id/name_edtxt"
         app:layout_constraintStart_toStartOf="@+id/name_edtxt" />
+
+    <androidx.camera.view.PreviewView
+        android:id="@+id/viewFinder"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/name_edtxt"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recognitionResults"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical"
+        app:layoutManager="LinearLayoutManager"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/name_edtxt"/>
 
     <EditText
         android:id="@+id/name_edtxt"
