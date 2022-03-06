@@ -1,12 +1,12 @@
 /**
- * # WEEK10: NDK (and the likes...)
+ * # WEEK10: NDK (and more...)
  * Communicating data across kotlin and C/C++ code.
  *
  * 1. Add NDK development capabilities to existing project
  * 2. Viewing some NDK examples
  *    - reusing common C++ code (OpenGL, Vulkan)
  *    - interfacing with a native C lib (ARCore)
- * 3. Machine Learning ( without directly working with NDK :) )
+ * 3. Working with machine learning models ( without directly touching NDK :) )
  */
 
 package com.singaporetech.eod
@@ -50,9 +50,31 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
     private lateinit var startAndroidLauncher: Intent
     private lateinit var binding:ActivitySplashBinding
 
-    /**
-     * TODO ML 1: add some camera vars.
-     */
+    // TODO NDK 0: install required dependencies (from Android Studio SDK Tools)
+    // - NDK: Android toolset to communicate with native code
+    // - CMake: native build tool
+    // - LLDB: native code debugger
+
+    // TODO NDK 1: create the native code and build configuration
+    // - create a src/cpp directory
+    // - create a new .cpp file
+    // - create a CMake build script called CMakeLists.txt (https://developer.android.com/studio/projects/configure-cmake.html)
+    // - check that the .cpp path (relative to script) is correct in the CMake script
+    // - make sure you add_library for your own libs and find_library for Android NDP native libs
+    // - then link the libs together using target_link_libraries
+    // - add CMake path in gradle (you can right click on folder and let IDE do it)
+    // - may need to restart project afer configuration
+
+    // TODO NDK 2: create a test method in native to receive a string and show it
+    // - declare a native function you want to write in C/C++
+    // - write the method in a cpp file
+    // - load native lib and declare native methods
+    // - paste a native function in the cpp file, and use IDE helper to fill in method name
+    // - receive string from native function and display it in a toast
+    // - try and debug within native using <android/log.h>
+    private external fun getNativeString(): String
+
+    // TODO ML 1: add some camera vars.
     private lateinit var preview: Preview // Preview use case, fast, responsive view of the camera
     private lateinit var imageAnalyzer: ImageAnalysis // Analysis use case, for running ML code
     private lateinit var camera: Camera
@@ -121,12 +143,10 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
             finish()
         }
 
-        /**
-         * TODO ML 3: Init additional view elements.
-         * 1. start camera view if permissions are granted
-         * 2. initialize recyclerview for showing inference results
-         * 3. observe results to display in recycler view
-         */
+        // TODO ML 3: Init additional view elements.
+        // 1. start camera view if permissions are granted
+        // 2. initialize recyclerview for showing inference results
+        // 3. observe results to display in recycler view
         // start camera view if permissions granted
         if (allPermissionsGranted()) {
             startCamera()
@@ -142,11 +162,9 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
         val viewAdapter = InferenceOutputsAdapter(this)
         binding.recognitionResults.adapter = viewAdapter
 
-        /**
-         * TODO ML 6: do something interesting when detected an object in the camera
-         * 1. display top inference output in the view
-         * 2. unlock secret backdoor login when a particular object is within sight
-         */
+        // TODO ML 6: do something interesting when detected an object in the camera
+        // 1. display top inference output in the view
+        // 2. unlock secret backdoor login when a particular object is within sight
         // observe inference outputs to display in recyclerview
         splashViewModel.inferenceOutputList.observe(this) {
             viewAdapter.submitList(it)
@@ -159,11 +177,12 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
             }
         }
 
+        // TODO NDK 2: show the string from native in a Toast here
+        Toast.makeText(this, getNativeString(), Toast.LENGTH_LONG).show()
+        binding.msgTxtview.text = getNativeString()
     }
 
-    /**
-     * TODO ML 4: add boilerplate to handle camera permissions
-     */
+    // TODO ML 4: add boilerplate to handle camera permissions
     /**
      * Check all permissions are granted - use for Camera permission in this example.
      * [code from https://github.com/hoitab/TFLClassify]
@@ -173,6 +192,7 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
             baseContext, it
         ) == PackageManager.PERMISSION_GRANTED
     }
+
     /**
      * This gets called after the Camera permission pop up is shown.
      * [code from https://github.com/hoitab/TFLClassify]
@@ -200,6 +220,7 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
             }
         }
     }
+
     /**
      * Start the Camera which involves:
      *
@@ -261,6 +282,11 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
         }, ContextCompat.getMainExecutor(this))
     }
 
+    override fun onRestart() {
+        super.onRestart()
+        binding.msgTxtview.text = ""
+    }
+
     /**
      * Example exercise of using a coroutine to perform the above weather update task
      * (we ignore our nice arch layers first to illustrate how coroutines function)
@@ -272,12 +298,13 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
      *   - .launch is fire and forget, .async is execute for a deferred result
      *   - the launch block below is non-blocking
      */
+    /*
     override fun onResume() {
         super.onResume()
-        binding.msgTxtview.text = ""
 
-        // onResumeLaunch()
+         onResumeLaunch()
     }
+    */
 
     fun onResumeLaunch() {
         var result1 = "empty1"
@@ -365,9 +392,12 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
     companion object {
         private val TAG = Splash::class.simpleName
 
-        /**
-         * TODO ML 1: Some consts for managing the ML stuff
-         */
+        // TODO NDK 2: load the native library to make it available for use here
+        init {
+            System.loadLibrary("eod")
+        }
+
+        // TODO ML 1: Some consts for managing the ML stuff
         private const val REQUEST_CODE_PERMISSIONS = 999 // Return code after asking for permission
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA) // permission needed
         private const val NUM_PROBS_TO_DISPLAY = 1 // Maximum number of results displayed
@@ -439,7 +469,6 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
     private class ImageAnalyzer(ctx: Context, private val listener: RecognitionListener) :
         ImageAnalysis.Analyzer {
 
-        // TODO NDK-ML: Load an ML model
         // - load the inception V3.1 model
         private val inceptionModel = InceptionV31Metadata1.newInstance(ctx)
 
