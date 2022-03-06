@@ -1,3 +1,14 @@
+/**
+ * # WEEK10: NDK (and the likes...)
+ * Communicating data across kotlin and C/C++ code.
+ *
+ * 1. Add NDK development capabilities to existing project
+ * 2. Viewing some NDK examples
+ *    - reusing common C++ code (OpenGL, Vulkan)
+ *    - interfacing with a native C lib (ARCore)
+ * 3. Machine Learning ( without directly working with NDK :) )
+ */
+
 package com.singaporetech.eod
 
 import android.Manifest
