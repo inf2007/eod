@@ -34,8 +34,8 @@ android {
         }
     }
     buildFeatures {
-        // to eliminate findViewByID
         viewBinding true
+        dataBinding true
         mlModelBinding true
     }
 }

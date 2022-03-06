@@ -31,6 +31,18 @@ class SplashViewModel(
     // - this is bound to the mutable one in repo
     var weatherData: LiveData<String>
 
+    /**
+     * TODO NDK-ML: additional
+     *
+     */
+    private val _inferenceOutputList = MutableLiveData<List<InferenceOutput>>()
+    val inferenceOutputList: LiveData<List<InferenceOutput>> = _inferenceOutputList
+
+
+    fun updateInferenceOutputs(inferenceOutputs: List<InferenceOutput>){
+        _inferenceOutputList.postValue(inferenceOutputs)
+    }
+
     init {
         // fetch online weather through the repo
         viewModelScope.launch {

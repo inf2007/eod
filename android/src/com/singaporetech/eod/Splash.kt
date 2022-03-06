@@ -42,7 +42,6 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
     /**
      * TODO NDK-ML: additional camera vars.
      */
-    // CameraX variables
     private lateinit var preview: Preview // Preview use case, fast, responsive view of the camera
     private lateinit var imageAnalyzer: ImageAnalysis // Analysis use case, for running ML code
     private lateinit var camera: Camera
@@ -53,9 +52,6 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
         val app = application as EODApp
         SplashViewModelFactory(app.playerRepo, app.weatherRepo)
     }
-
-    // Get the VM that contains the recognition result.
-    private val recogViewModel: RecognitionListViewModel by viewModels()
 
     /**
      * Helper function to start the game.
@@ -115,22 +111,38 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
         }
 
         /**
-         * TODO NDK-ML: Setup for additional view elements.
+         * TODO NDK-ML: Init additional view elements.
+         * 1. start camera view if permissions are granted
+         * 2. initialize recyclerview for showing inference results
+         * 3. observe results to display in recycler view
          */
-        // Request camera permissions
+        // start camera view if permissions granted
         if (allPermissionsGranted()) {
             startCamera()
-        } else {
+        }
+        // else request permissions
+        else {
             ActivityCompat.requestPermissions(
                 this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS
             )
+        }
+
+        // init recyclerview for inference results
+        val viewAdapter = InferenceOutputsAdapter(this)
+        binding.recognitionResults.adapter = viewAdapter
+
+        // observe results to display in recyclerview
+        splashViewModel.inferenceOutputList.observe(this) {
+            viewAdapter.submitList(it)
         }
 
     }
 
 
     /**
+     * TODO NDK-ML: add boilerplate to handle camera permissions
      * Check all permissions are granted - use for Camera permission in this example.
+     * [code from https://github.com/hoitab/TFLClassify]
      */
     private fun allPermissionsGranted(): Boolean = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(
@@ -139,7 +151,9 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
     }
 
     /**
+     * TODO NDK-ML: add more boilerplate to handle camera permissions
      * This gets called after the Camera permission pop up is shown.
+     * [code from https://github.com/hoitab/TFLClassify]
      */
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -172,6 +186,8 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
      * 2. Initialising the image analyser use case
      * 3. Attach both to the lifecycle of this activity
      * 4. Pipe the output of the preview object to the PreviewView on the screen
+     *
+     * [code adapted from https://github.com/hoitab/TFLClassify]
      */
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
@@ -196,7 +212,7 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
                 .also { analysisUseCase: ImageAnalysis ->
                     analysisUseCase.setAnalyzer(cameraExecutor, ImageAnalyzer(this) { items ->
                         // updating the list of recognised objects
-                        recogViewModel.updateData(items)
+                        splashViewModel.updateInferenceOutputs(items)
                     })
                 }
 
@@ -328,9 +344,13 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
 
     companion object {
         private val TAG = Splash::class.simpleName
+
+        /**
+         * TODO NDK-ML: Some consts for managing the ML stuff
+         */
         private const val REQUEST_CODE_PERMISSIONS = 999 // Return code after asking for permission
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA) // permission needed
-        private const val MAX_RESULT_DISPLAY = 3 // Maximum number of results displayed
+        private const val NUM_PROBS_TO_DISPLAY = 1 // Maximum number of results displayed
 
         /**
          * TODO THREADING 2.1: observe the asynctask approach for fetching (mock) weather updates
@@ -389,56 +409,47 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
     }
 
     /**
-     * TODO NDK-ML
+     * TODO NDK-ML: define a class to handle the ML results derived from ImageAnalysis.Analyzer
+     *
+     * [code adapted from https://github.com/hoitab/TFLClassify]
      */
     private class ImageAnalyzer(ctx: Context, private val listener: RecognitionListener) :
         ImageAnalysis.Analyzer {
 
-        // TODO 1: Add class variable TensorFlow Lite Model
-        // Initializing the flowerModel by lazy so that it runs in the same thread when the process
-        // method is called.
-
-        // Loading the inception V3.1 model
+        // TODO NDK-ML: Load an ML model
+        // - load the inception V3.1 model
         private val inceptionModel = InceptionV31Metadata1.newInstance(ctx)
-
-        // TODO 6. Optional GPU acceleration
-
 
         override fun analyze(imageProxy: ImageProxy) {
 
-            val items = mutableListOf<Recognition>()
+            val items = mutableListOf<InferenceOutput>()
 
-            // TODO 2: Convert Image to Bitmap then to TensorImage
+            // convert Image to Bitmap then to TensorImage
             val tfImage = TensorImage.fromBitmap(toBitmap(imageProxy))
 
-            // TODO 3: Process the image using the trained model, sort and pick out the top results
-//            val outputs = flowerModel.process(tfImage)
-            val outputs = inceptionModel.process(tfImage)
-                .probabilityAsCategoryList.apply {
-                    sortByDescending { it.score } // Sort with highest confidence first
-                }.take(MAX_RESULT_DISPLAY) // take the top results
+            // run image through the trained model then sort and take top results
+            val outputs = inceptionModel.process(tfImage).probabilityAsCategoryList
+                .apply {
+                    sortByDescending {
+                        it.score
+                    }
+                }
+                .take(NUM_PROBS_TO_DISPLAY)
 
-
-            // TODO 4: Converting the top probability items into a list of recognitions
+            // accumulate results in a list
             for (output in outputs) {
-                items.add(Recognition(output.label, output.score))
+                items.add(InferenceOutput(output.label, output.score))
             }
 
-            // START - Placeholder code at the start of the codelab. Comment this block of code out.
-//            for (i in 0 until MAX_RESULT_DISPLAY){
-//                items.add(Recognition("Fake label $i", Random.nextFloat()))
-//            }
-            // END - Placeholder code at the start of the codelab. Comment this block of code out.
-
-            // Return the result
+            // return results to listener
             listener(items.toList())
 
-            // Close the image,this tells CameraX to feed the next image to the analyzer
+            // close the image which triggers processing of the next image to the analyzer
             imageProxy.close()
         }
 
         /**
-         * Convert Image Proxy to Bitmap
+         * Convert Image Proxy to Bitmap.
          */
         private val yuvToRgbConverter = YuvToRgbConverter(ctx)
         private lateinit var bitmapBuffer: Bitmap
@@ -479,4 +490,4 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
 }
 
 // Listener for the result of the ImageAnalyzer
-typealias RecognitionListener = (recognition: List<Recognition>) -> Unit
+typealias RecognitionListener = (inferenceOutput: List<InferenceOutput>) -> Unit

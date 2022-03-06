@@ -27,7 +27,6 @@
         android:id="@+id/msg_txtview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:fontFamily="@font/conthrax"
@@ -36,17 +35,19 @@
         android:textColor="@android:color/holo_orange_light"
         android:gravity="center"
         android:textAlignment="gravity"
-        app:layout_constraintBottom_toTopOf="@id/viewFinder"
+        app:layout_constraintTop_toBottomOf="@id/weather_txtview"
         app:layout_constraintEnd_toEndOf="@+id/name_edtxt"
         app:layout_constraintStart_toStartOf="@+id/name_edtxt" />
 
     <androidx.camera.view.PreviewView
         android:id="@+id/viewFinder"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="300dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/name_edtxt"/>
+        app:layout_constraintTop_toBottomOf="@id/msg_txtview"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recognitionResults"
@@ -56,7 +57,7 @@
         android:orientation="vertical"
         app:layoutManager="LinearLayoutManager"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/name_edtxt"/>
+        app:layout_constraintTop_toBottomOf="@id/viewFinder"/>
 
     <EditText
         android:id="@+id/name_edtxt"
@@ -66,13 +67,12 @@
         android:layout_marginStart="32dp"
         android:backgroundTint="@android:color/holo_orange_light"
         android:fontFamily="casual"
+        android:gravity="center"
         android:hint="@string/name_hint"
         android:singleLine="true"
-        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/recognitionResults" />
 
     <!--
     TODO ARCH 3.0: Manage membership data with a Room
@@ -103,7 +103,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="18dp"
         android:background="@android:color/holo_orange_light"
         android:text="@string/play_btn_txt"
         android:textSize="24sp"
@@ -119,7 +119,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="18dp"
         android:background="@android:color/holo_orange_dark"
         android:text="@string/exit"
         android:textSize="24sp"
