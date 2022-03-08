@@ -56,22 +56,20 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
     // - LLDB: native code debugger
 
     // TODO NDK 1: create the native code and build configuration
-    // - create a src/cpp directory
-    // - create a new .cpp file
-    // - create a CMake build script called CMakeLists.txt (https://developer.android.com/studio/projects/configure-cmake.html)
-    // - check that the .cpp path (relative to script) is correct in the CMake script
-    // - make sure you add_library for your own libs and find_library for Android NDP native libs
-    // - then link the libs together using target_link_libraries
-    // - add CMake path in gradle (you can right click on folder and let IDE do it)
-    // - may need to restart project afer configuration
+    // - add C++ module to the app using the Android Studio interface
+    // - check the CMake build script (auto-generated)
+    //   - check that the .cpp path (relative to script) is correct in the CMake script
+    //   - you can add_library for your own libs and find_library for Android NDP native libs
+    //   - link the libs together using target_link_libraries
 
     // TODO NDK 2: create a test method in native to receive a string and show it
     // - declare a native function you want to write in C/C++
-    // - write the method in a cpp file
-    // - load native lib and declare native methods
-    // - paste a native function in the cpp file, and use IDE helper to fill in method name
-    // - receive string from native function and display it in a toast
+    // - edit the new .cpp file that was auto-generated (use auto-complete to match the names)
+    // - load native lib in kotlin
+    // - in kotlin, receive a string from the native function and display it in a toast
     // - try and debug within native using <android/log.h>
+
+    // TODO NDK 2: declare a native function to write in C/C++
     private external fun getNativeString(): String
 
     // TODO ML 1: add some camera vars.
@@ -160,7 +158,10 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
 
         // init recyclerview for inference results
         val viewAdapter = InferenceOutputsAdapter(this)
-        binding.recognitionResults.adapter = viewAdapter
+        binding.outputsRecyclerview.adapter = viewAdapter
+
+        // disable recyclerview animation to reduce flickering
+        binding.outputsRecyclerview.itemAnimator = null
 
         // TODO ML 6: do something interesting when detected an object in the camera
         // 1. display top inference output in the view
@@ -274,7 +275,7 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
                 )
 
                 // Attach the preview to preview view, aka View Finder
-                preview.setSurfaceProvider(binding.viewFinder.surfaceProvider)
+                preview.setSurfaceProvider(binding.cameraPreview.surfaceProvider)
             } catch (exc: Exception) {
                 Log.e(TAG, "Use case binding failed", exc)
             }

@@ -44,7 +44,7 @@
          2. add a recyclerview to show ML results
      -->
     <androidx.camera.view.PreviewView
-        android:id="@+id/viewFinder"
+        android:id="@+id/camera_preview"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
@@ -54,14 +54,14 @@
         app:layout_constraintTop_toBottomOf="@id/msg_txtview"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recognitionResults"
+        android:id="@+id/outputs_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:orientation="vertical"
         app:layoutManager="LinearLayoutManager"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/viewFinder"/>
+        app:layout_constraintTop_toBottomOf="@id/camera_preview"/>
 
     <EditText
         android:id="@+id/name_edtxt"
@@ -76,7 +76,7 @@
         android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recognitionResults" />
+        app:layout_constraintTop_toBottomOf="@id/outputs_recyclerview" />
 
     <!--
     TODO ARCH 3.0: Manage membership data with a Room
