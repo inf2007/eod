@@ -7,6 +7,7 @@
  *    - reusing common C++ code (OpenGL, Vulkan)
  *    - interfacing with a native C lib (ARCore)
  * 3. Working with machine learning models ( without directly touching NDK :) )
+ *    - add a new secret backdoor "see fridge" login feature to EOD
  */
 
 package com.singaporetech.eod
@@ -50,12 +51,13 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
     private lateinit var startAndroidLauncher: Intent
     private lateinit var binding:ActivitySplashBinding
 
-    // TODO NDK 0: install required dependencies (from Android Studio SDK Tools)
+    // TODO NDK 0: install required dependencies
+    // (from Android Studio SDK Tools)
     // - NDK: Android toolset to communicate with native code
     // - CMake: native build tool
     // - LLDB: native code debugger
 
-    // TODO NDK 1: create the native code and build configuration
+    // TODO NDK 1: implement native code and build configuration
     // - add C++ module to the app using the Android Studio interface
     // - check the CMake build script (auto-generated)
     //   - check that the .cpp path (relative to script) is correct in the CMake script
@@ -64,12 +66,10 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
 
     // TODO NDK 2: create a test method in native to receive a string and show it
     // - declare a native function you want to write in C/C++
-    // - edit the new .cpp file that was auto-generated (use auto-complete to match the names)
-    // - load native lib in kotlin
-    // - in kotlin, receive a string from the native function and display it in a toast
-    // - try and debug within native using <android/log.h>
-
-    // TODO NDK 2: declare a native function to write in C/C++
+    // - edit the new .cpp file that was auto-generated (auto-complete to match the names)
+    // - load the native lib in kotlin
+    // - in kotlin, receive a string from the native function and display it in the view
+    // - try some debug logging within native using <android/log.h>
     private external fun getNativeString(): String
 
     // TODO ML 1: add some camera vars.
@@ -88,7 +88,7 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
      * Helper function to start the game.
      * Android launcher will start the game state service.
      */
-    fun launchGame() {
+    private fun launchGame() {
         startActivity(startAndroidLauncher)
     }
 
@@ -164,11 +164,10 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
         binding.outputsRecyclerview.itemAnimator = null
 
         // TODO ML 6: do something interesting when detected an object in the camera
-        // 1. display top inference output in the view
+        // 1. observe inference outputs to display in the recyclerview
         // 2. unlock secret backdoor login when a particular object is within sight
-        // observe inference outputs to display in recyclerview
         splashViewModel.inferenceOutputList.observe(this) {
-            viewAdapter.submitList(it)
+            viewAdapter.submitList(it) // send to recyclerview
             if (it[0].label == "refrigerator") {
                 binding.msgTxtview.text = "UNLOCKED SECRET \nbackdoor login..."
                 launch {
@@ -178,7 +177,7 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
             }
         }
 
-        // TODO NDK 2: show the string from native in a Toast here
+        // TODO NDK 2-2: show the string from native in some view element here
         Toast.makeText(this, getNativeString(), Toast.LENGTH_LONG).show()
         binding.msgTxtview.text = getNativeString()
     }
@@ -393,7 +392,7 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
     companion object {
         private val TAG = Splash::class.simpleName
 
-        // TODO NDK 2: load the native library to make it available for use here
+        // TODO NDK 2-1: load the native library to make it available for use here
         init {
             System.loadLibrary("eod")
         }
