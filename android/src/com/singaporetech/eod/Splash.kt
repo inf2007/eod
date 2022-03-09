@@ -72,11 +72,13 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
     // - try some debug logging within native using <android/log.h>
     private external fun getNativeString(): String
 
-    // TODO ML 1: add some camera vars.
+    // TODO ML 2: add some camera vars.
+    // region ML2
     private lateinit var preview: Preview // Preview use case, fast, responsive view of the camera
     private lateinit var imageAnalyzer: ImageAnalysis // Analysis use case, for running ML code
     private lateinit var camera: Camera
     private val cameraExecutor = Executors.newSingleThreadExecutor()
+    // endregion
 
     // Get the VM with the dependencies injected through a Factory pattern
     private val splashViewModel: SplashViewModel by viewModels {
@@ -146,6 +148,7 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
         binding.msgTxtview.text = getNativeString()
 
         // TODO ML 4: Init additional view elements.
+        // region ML4
         // 1. start camera view if permissions are granted
         // 2. initialize recyclerview for showing inference results
         // 3. observe results to display in recycler view
@@ -158,6 +161,7 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
                 this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS
             )
         }
+        // endregion
 
         // init recyclerview for inference results
         val viewAdapter = InferenceOutputsAdapter(this)
@@ -166,7 +170,8 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
         // disable recyclerview animation to reduce flickering
         binding.outputsRecyclerview.itemAnimator = null
 
-        // TODO ML 7: do something interesting when detected an object in the camera
+        // TODO ML 8: do something interesting when detected an object in the camera
+        // region ML8
         // 1. observe inference outputs to display in the recyclerview
         // 2. unlock secret backdoor login when a particular object is within sight
         splashViewModel.inferenceOutputList.observe(this) {
@@ -179,9 +184,11 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
                 }
             }
         }
+        // endregion
     }
 
     // TODO ML 5: add boilerplate to handle camera permissions
+    // region ML5
     /**
      * Check all permissions are granted - use for Camera permission in this example.
      * [code from https://github.com/hoitab/TFLClassify]
@@ -280,6 +287,7 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
 
         }, ContextCompat.getMainExecutor(this))
     }
+    // endregion
 
     override fun onRestart() {
         super.onRestart()
@@ -396,10 +404,12 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
             System.loadLibrary("eod")
         }
 
-        // TODO ML 2: Some consts for managing the ML stuff
+        // TODO ML 3: Some consts for managing the ML stuff
+        // region ML3
         private const val REQUEST_CODE_PERMISSIONS = 999 // Return code after asking for permission
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA) // permission needed
         private const val NUM_PROBS_TO_DISPLAY = 1 // Maximum number of results displayed
+        // endregion
 
         /**
          * TODO THREADING 2.1: observe the asynctask approach for fetching (mock) weather updates
@@ -457,8 +467,10 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
         }
     }
 
+    // TODO ML 6: define a class to handle the ML results derived from ImageAnalysis.Analyzer
+    // region ML6
     /**
-     * TODO ML 6: define a class to handle the ML results derived from ImageAnalysis.Analyzer
+     * Analyze ML results.
      * - note that you can load a new tflite model for ML using the Android Studio interface
      * - you can download pre-trained models at https://tfhub.dev
      * - you can also train your own model using datasets at https://www.tensorflow.org/datasets
@@ -538,6 +550,7 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
         }
 
     }
+    // endregion
 }
 
 // Listener for the result of the ImageAnalyzer

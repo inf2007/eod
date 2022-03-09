@@ -134,9 +134,6 @@ dependencies {
     implementation "androidx.room:room-runtime:2.4.2"
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.camera:camera-lifecycle:1.0.2'
-    implementation 'org.tensorflow:tensorflow-lite-support:0.3.0'
-    implementation 'org.tensorflow:tensorflow-lite-metadata:0.3.0'
-    implementation 'org.tensorflow:tensorflow-lite-gpu:2.3.0'// essential runtime
     kapt "androidx.room:room-compiler:2.4.2" // to compile kotlin annotations
     implementation "androidx.room:room-ktx:2.4.2" // extensions and coroutines
     implementation "androidx.work:work-runtime:2.7.1"
@@ -167,11 +164,16 @@ dependencies {
     androidTestImplementation "androidx.test.ext:truth:1.4.0"
     androidTestImplementation 'com.google.truth:truth:1.0.1'
 
-    // TODO ML 0: Add camera dependencies
+    // TODO ML 0: Add camera and ML dependencies
+    // region ML0
     // - need to provide CameraX core library using camera2 implementation else error
     implementation "androidx.camera:camera-camera2:1.0.2"
     implementation "androidx.camera:camera-lifecycle:1.0.2"
     implementation "androidx.camera:camera-view:1.0.0-alpha32" // 1.1.0-betaxx crashes
+    implementation 'org.tensorflow:tensorflow-lite-support:0.3.0'
+    implementation 'org.tensorflow:tensorflow-lite-metadata:0.3.0'
+    implementation 'org.tensorflow:tensorflow-lite-gpu:2.3.0'
+    // endregion
 }
 
 repositories {

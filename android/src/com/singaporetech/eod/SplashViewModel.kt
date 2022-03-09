@@ -32,12 +32,14 @@ class SplashViewModel(
     var weatherData: LiveData<String>
 
     // TODO ML 7: create view logic to update the recyclerview with new inference outputs
+    // region ML7
     private val _inferenceOutputList = MutableLiveData<List<InferenceOutput>>()
     val inferenceOutputList: LiveData<List<InferenceOutput>> = _inferenceOutputList
 
     fun updateInferenceOutputs(inferenceOutputs: List<InferenceOutput>){
         _inferenceOutputList.postValue(inferenceOutputs)
     }
+    // endregion
 
     init {
         // fetch online weather through the repo
