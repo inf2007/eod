@@ -141,11 +141,14 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
             finish()
         }
 
-        // TODO ML 3: Init additional view elements.
+        // TODO NDK 2-2: show the string from native in some view element here
+        Toast.makeText(this, getNativeString(), Toast.LENGTH_LONG).show()
+        binding.msgTxtview.text = getNativeString()
+
+        // TODO ML 4: Init additional view elements.
         // 1. start camera view if permissions are granted
         // 2. initialize recyclerview for showing inference results
         // 3. observe results to display in recycler view
-        // start camera view if permissions granted
         if (allPermissionsGranted()) {
             startCamera()
         }
@@ -163,7 +166,7 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
         // disable recyclerview animation to reduce flickering
         binding.outputsRecyclerview.itemAnimator = null
 
-        // TODO ML 6: do something interesting when detected an object in the camera
+        // TODO ML 7: do something interesting when detected an object in the camera
         // 1. observe inference outputs to display in the recyclerview
         // 2. unlock secret backdoor login when a particular object is within sight
         splashViewModel.inferenceOutputList.observe(this) {
@@ -176,13 +179,9 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
                 }
             }
         }
-
-        // TODO NDK 2-2: show the string from native in some view element here
-        Toast.makeText(this, getNativeString(), Toast.LENGTH_LONG).show()
-        binding.msgTxtview.text = getNativeString()
     }
 
-    // TODO ML 4: add boilerplate to handle camera permissions
+    // TODO ML 5: add boilerplate to handle camera permissions
     /**
      * Check all permissions are granted - use for Camera permission in this example.
      * [code from https://github.com/hoitab/TFLClassify]
@@ -397,7 +396,7 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
             System.loadLibrary("eod")
         }
 
-        // TODO ML 1: Some consts for managing the ML stuff
+        // TODO ML 2: Some consts for managing the ML stuff
         private const val REQUEST_CODE_PERMISSIONS = 999 // Return code after asking for permission
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA) // permission needed
         private const val NUM_PROBS_TO_DISPLAY = 1 // Maximum number of results displayed
@@ -459,7 +458,7 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
     }
 
     /**
-     * TODO ML 5: define a class to handle the ML results derived from ImageAnalysis.Analyzer
+     * TODO ML 6: define a class to handle the ML results derived from ImageAnalysis.Analyzer
      * - note that you can load a new tflite model for ML using the Android Studio interface
      * - you can download pre-trained models at https://tfhub.dev
      * - you can also train your own model using datasets at https://www.tensorflow.org/datasets

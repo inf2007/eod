@@ -39,7 +39,7 @@
         app:layout_constraintEnd_toEndOf="@+id/name_edtxt"
         app:layout_constraintStart_toStartOf="@+id/name_edtxt" />
 
-    <!-- TODO ML 2: Add some views for processing video as login
+    <!-- TODO ML 3: Add some views for processing video as login
          1. add a camera view to steam video frames for processing
          2. add a recyclerview to show ML results
      -->
