@@ -6,7 +6,7 @@
  * 2. Viewing some NDK examples
  *    - reusing common C++ code (OpenGL, Vulkan)
  *    - interfacing with a native C lib (ARCore)
- * 3. Working with machine learning models ( without directly touching NDK :) )
+ * 3. Working with machine learning models ( without directly touching NDK (NNAPI) :) )
  *    - add a new secret backdoor "see fridge" login feature to EOD
  */
 
@@ -161,7 +161,6 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
                 this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS
             )
         }
-        // endregion
 
         // init recyclerview for inference results
         val viewAdapter = InferenceOutputsAdapter(this)
@@ -169,6 +168,7 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
 
         // disable recyclerview animation to reduce flickering
         binding.outputsRecyclerview.itemAnimator = null
+        // endregion
 
         // TODO ML 8: do something interesting when detected an object in the camera
         // region ML8
@@ -179,7 +179,7 @@ class Splash : AppCompatActivity(), CoroutineScope by MainScope() {
             if (it[0].label == "refrigerator") {
                 binding.msgTxtview.text = "UNLOCKED SECRET \nbackdoor login..."
                 launch {
-                    delay(3000)
+                    delay(6000)
                     launchGame()
                 }
             }
