@@ -27,18 +27,41 @@
         android:id="@+id/msg_txtview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:fontFamily="@font/conthrax"
         android:text="@string/welcome_note"
         android:textSize="16sp"
-        android:textColor="@android:color/holo_orange_light"
+        android:textColor="@android:color/holo_green_light"
         android:gravity="center"
         android:textAlignment="gravity"
-        app:layout_constraintBottom_toTopOf="@+id/name_edtxt"
+        app:layout_constraintTop_toBottomOf="@id/weather_txtview"
         app:layout_constraintEnd_toEndOf="@+id/name_edtxt"
         app:layout_constraintStart_toStartOf="@+id/name_edtxt" />
+
+    <!-- TODO ML 3: Add some views for processing video as login
+         1. add a camera view to steam video frames for processing
+         2. add a recyclerview to show ML results
+     -->
+    <androidx.camera.view.PreviewView
+        android:id="@+id/camera_preview"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/msg_txtview"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/outputs_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical"
+        app:layoutManager="LinearLayoutManager"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/camera_preview"/>
 
     <EditText
         android:id="@+id/name_edtxt"
@@ -48,13 +71,12 @@
         android:layout_marginStart="32dp"
         android:backgroundTint="@android:color/holo_orange_light"
         android:fontFamily="casual"
+        android:gravity="center"
         android:hint="@string/name_hint"
         android:singleLine="true"
-        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/outputs_recyclerview" />
 
     <!--
     TODO ARCH 3.0: Manage membership data with a Room
@@ -85,7 +107,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="18dp"
         android:background="@android:color/holo_orange_light"
         android:text="@string/play_btn_txt"
         android:textSize="24sp"
@@ -101,7 +123,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="18dp"
         android:background="@android:color/holo_orange_dark"
         android:text="@string/exit"
         android:textSize="24sp"

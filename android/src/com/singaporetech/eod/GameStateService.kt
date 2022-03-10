@@ -185,7 +185,7 @@ class GameStateService: Service(), SensorEventListener, CoroutineScope by MainSc
                         this@GameStateService,
                         PENDINGINTENT_ID,
                         intentToLaunchGame,
-                        PendingIntent.FLAG_UPDATE_CURRENT)
+                        PendingIntent.FLAG_IMMUTABLE)
 
                 // build the notification
                 val noti = Notification.Builder(this@GameStateService, NOTIFICATION_CHANNEL_ID)
